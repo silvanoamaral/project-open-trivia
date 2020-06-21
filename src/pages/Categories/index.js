@@ -27,7 +27,8 @@ const Categories = props => {
   const getQuestions = async id => {
     try {
       var response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${levelQuestions}&type=multiple`)
-      return response.data
+      fetchQuestions(response.data)
+      history.push('/questoes')
     } catch (error) {
       throw new Error('Unable to fetch questions', error)
     }
@@ -43,10 +44,8 @@ const Categories = props => {
 
   const handleChange = async (event) => {
     const idCategorie = event.target.value
-    const questions = await getQuestions(idCategorie)
+    getQuestions(idCategorie)
     setIdCategorie(idCategorie)
-    fetchQuestions(questions)
-    history.push('/questoes')
   }
 
   return (

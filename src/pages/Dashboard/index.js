@@ -7,7 +7,6 @@ const Dashboard = props => {
     dashboard
   } = { ...props }
 
-  console.log(dashboard)
   return (
     <>
       <p>Dashboard</p>

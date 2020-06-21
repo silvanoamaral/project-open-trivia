@@ -6,7 +6,14 @@ import axios from 'axios'
 import Feedback from '../../components/Feedback'
 import QuestionOptions from '../../components/QuestionOptions'
 
-import { viewFeedback, setRightAnswer, setErrorAnswer, changeDifficulty, resetLevel, fetchQuestions } from '../../redux/actions'
+import {
+  viewFeedback,
+  setRightAnswer,
+  setErrorAnswer,
+  changeDifficulty,
+  resetLevel,
+  fetchQuestions
+} from '../../redux/actions'
 
 import './Questions.scss'
 
@@ -38,44 +45,41 @@ const Questions = props => {
     setButtonDisabled(true)
   }
 
-  const getQuestions = async () => {
-    try {
-      var response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${idCategorie}&difficulty=${levelQuestions}&type=multiple`)
-      return response.data
-    } catch (error) {
-      throw new Error('Unable to fetch questions', error)
+  const getQuestions = async (level) => {
+    if (indexCurrent < 10) {
+      try {
+        var response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${idCategorie}&difficulty=${level}&type=multiple`)
+        fetchQuestions(response.data)
+      } catch (error) {
+        throw new Error('Unable to fetch questions', error)
+      }
     }
-  }
-
-  const load = async () => {
-    const questions = await getQuestions(idCategorie)
-    console.log('load levelQuestions', levelQuestions)
-    fetchQuestions(questions)
   }
 
   const rangeCategorie = () => {
     if (rightAnswer === 2 && levelQuestions === 'medium') {
       console.log('Precisa aumentar o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para hard', 'Id da Categoria', idCategorie)
       changeDifficulty('hard')
-      console.log('rangeCategorie levelQuestions', levelQuestions)
+
       resetLevel()
-      setTimeout(() => {
-        load()
-      }, 1000)
+      getQuestions('hard')
     }
     if (rightAnswer === 2 && levelQuestions === 'easy') {
       changeDifficulty('medium')
       resetLevel()
+      getQuestions('medium')
       console.log('Precisa aumentar o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para medium', 'Id da Categoria', idCategorie)
     }
     if (errorAnswer === 2 && levelQuestions === 'medium') {
       changeDifficulty('easy')
       resetLevel()
+      getQuestions('easy')
       console.log('Precisa diminuir o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para easy', 'Id da Categoria', idCategorie)
     }
     if (errorAnswer === 2 && levelQuestions === 'hard') {
       changeDifficulty('medium')
       resetLevel()
+      getQuestions('medium')
       console.log('Precisa diminuir o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para medium', 'Id da Categoria', idCategorie)
     }
   }
