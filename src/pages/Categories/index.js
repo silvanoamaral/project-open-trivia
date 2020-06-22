@@ -22,11 +22,11 @@ const Categories = props => {
   }, [])
 
   return (
-    <>
+    <div data-testid='categories'>
       {loadInfo.data &&
         <ListCategories {...loadInfo.data} history={history} />
       }
-    </>
+    </div>
   )
 }
 

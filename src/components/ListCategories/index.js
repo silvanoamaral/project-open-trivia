@@ -29,11 +29,11 @@ const ListCategories = props => {
   }
 
   return (
-    <div>
+    <div data-testid='listcategories'>
       <h2>Categorias</h2>
       {props.trivia_categories &&
         props.trivia_categories.map(cat => {
-          return <div key={cat.id} onClick={() => handleClick((cat.id).toString())}>
+          return <div key={cat.id} onClick={() => handleClick((cat.id).toString())} data-testid='linkcategories'>
             <p>{cat.name}</p>
           </div>
         })
