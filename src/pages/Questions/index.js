@@ -15,8 +15,6 @@ import {
   fetchQuestions
 } from '../../redux/actions'
 
-import './Questions.scss'
-
 const Questions = props => {
   const {
     questions,
@@ -39,6 +37,7 @@ const Questions = props => {
   const [activeTab, setActiveTab] = useState()
   const [message, setMessage] = useState()
   const [buttonDisabled, setButtonDisabled] = useState(true)
+  const [statusAnswer, setStatusAnswer] = useState('')
 
   const resetQuestions = () => {
     setActiveTab(null)
@@ -88,8 +87,10 @@ const Questions = props => {
     if (answer) {
       setMessage('Você acertou! ')
       setRightAnswer()
+      setStatusAnswer('')
     } else {
       setMessage('Você errou!')
+      setStatusAnswer('error')
       setErrorAnswer()
     }
     viewFeedback()
@@ -115,9 +116,9 @@ const Questions = props => {
   }, [indexCurrent, idCategorie])
 
   return (
-    <div className='questions'>
+    <div className='questions container'>
       {showHideFeedback &&
-        <Feedback message={message} />
+        <Feedback message={message} status={statusAnswer} />
       }
       {questions[indexCurrent] &&
         <>
@@ -126,10 +127,11 @@ const Questions = props => {
             incorrectAnswers = {questions[indexCurrent].incorrect_answers}
             correctAnswer = {questions[indexCurrent].correct_answer}
             onClick={handleClickQuestion}
+            onClickAnswer={handleClickAnswer}
+            disabled={buttonDisabled}
             activeTab={activeTab}
             indexCurrent={indexCurrent}
           />
-          <button onClick={handleClickAnswer} disabled={buttonDisabled}>Responder</button>
         </>
       }
     </div>

@@ -5,6 +5,8 @@ import axios from 'axios'
 
 import { fetchQuestions, setIdCategorie } from '../../redux/actions'
 
+import './ListCategories.scss'
+
 const ListCategories = props => {
   const {
     history,
@@ -29,15 +31,17 @@ const ListCategories = props => {
   }
 
   return (
-    <div data-testid='listcategories'>
+    <div data-testid='listcategories' className='listcategories'>
       <h2>Categorias</h2>
-      {props.trivia_categories &&
-        props.trivia_categories.map(cat => {
-          return <div key={cat.id} onClick={() => handleClick((cat.id).toString())} data-testid='linkcategories'>
-            <p>{cat.name}</p>
-          </div>
-        })
-      }
+      <div className='list'>
+        {props.trivia_categories &&
+          props.trivia_categories.map(cat => {
+            return <div key={cat.id} onClick={() => handleClick((cat.id).toString())} data-testid='linkcategories'>
+              <p>{cat.name}</p>
+            </div>
+          })
+        }
+      </div>
     </div>
   )
 }

@@ -10,7 +10,8 @@ const Feedback = props => {
   const {
     message,
     nextQuestion,
-    viewFeedback
+    viewFeedback,
+    status
   } = props
 
   const handleClick = () => {
@@ -19,10 +20,11 @@ const Feedback = props => {
   }
 
   return (
-    <div className='lightbox'>
+    <div className={`lightbox ${status}`}>
       <div>
+        <span></span>
         <strong>{message}</strong>
-        <button onClick={handleClick}>Avançar</button>
+        <button onClick={handleClick}>Avançar <img src={require('../../assets/images/arrow-right.svg')} alt='arrow' /></button>
       </div>
     </div>
   )
@@ -38,6 +40,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(null, mapDispatchToProps)(Feedback)
 
 Feedback.propTypes = {
+  status: PropTypes.string,
   message: PropTypes.string,
   nextQuestion: PropTypes.func,
   viewFeedback: PropTypes.func

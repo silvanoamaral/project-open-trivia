@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './QuestionOptions.scss'
+
 const QuestionOptions = props => {
   const {
     category,
@@ -10,20 +12,25 @@ const QuestionOptions = props => {
     incorrectAnswers,
     correctAnswer,
     indexCurrent,
-    onClick
+    onClick,
+    disabled,
+    onClickAnswer
   } = props
 
   return (
     <div>
-      <div>
+      <div className='title'>
         <h2>{category}</h2>
-        <span>Fechar</span>
+        <span><img src={require('../../assets/images/x-circle.svg')} /> Fechar</span>
       </div>
 
       <div className='questions__box'>
         <div>
           <p>Questão {indexCurrent + 1}</p>
-          <p>{difficulty}</p>
+          <p className='level'>
+            <img src={require('../../assets/images/star.svg')} />
+            {difficulty}
+          </p>
         </div>
 
         <p>{question}</p>
@@ -44,6 +51,9 @@ const QuestionOptions = props => {
             </li>
           </ul>
         </div>
+        <div className='btn'>
+          <button onClick={onClickAnswer} disabled={disabled}>Responder</button>
+        </div>
       </div>
     </div>
   )
@@ -52,6 +62,8 @@ const QuestionOptions = props => {
 export default QuestionOptions
 
 QuestionOptions.propTypes = {
+  onClickAnswer: PropTypes.func,
+  disabled: PropTypes.bool,
   category: PropTypes.string,
   difficulty: PropTypes.string,
   question: PropTypes.string,

@@ -1,0 +1,131 @@
+.questions {
+  &.container {
+    max-width: 700px;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    span {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  h2 {
+    color: #1E2124;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &__box {
+    background: #FFFFFF;
+    border: 1px solid #E4E4E6;
+    box-shadow: 0px 1px 4px rgba(52, 60, 88, 0.4);
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 100px;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+        color: #1E2124;
+
+        &.level {
+          font-size: 12px;
+          background: #343c5833;
+          border-radius: 14px;
+          color: #343C58;
+          padding: 1px 10px;
+          text-transform: capitalize;
+
+          img {
+            margin-right: 3px;
+          }
+        }
+      }
+
+      + p {
+        margin: 30px 0 40px 0;
+        line-height: 19px;
+        letter-spacing: 0.2px;
+      }
+
+      &.answer {
+        ul {
+          width: 100%;
+        }
+      }
+    }
+
+    .btn {
+      padding-top: 45px;
+
+      button {
+        background: #0467DB;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+        margin: 0 auto;
+        border: 0;
+        width: 100%;
+        
+        height: 44px;
+        color: #fff;
+        font-weight: 500;
+
+        &:disabled {
+          background: #C9CCCF;
+          cursor: default;
+        }
+
+        @media (min-width: 768px) {
+          width: 150px;
+        }
+        @media (min-width: 1024px) {
+          width: 150px;
+        }
+      }
+    }
+  }
+
+  li {
+    list-style: none;
+    margin-bottom: 15px;
+    background: #FFFFFF;
+    border: 1px solid #C9CCCF;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px rgba(52, 60, 88, 0.4);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+  
+    span {
+      cursor: pointer;
+      display: block;
+      padding: 20px 15px;
+      width: 100%;
+    }
+  
+    &.active {
+      border: 3px solid #0467DB;
+    }
+  }
+}

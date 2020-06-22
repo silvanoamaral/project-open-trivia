@@ -22,7 +22,7 @@ const Categories = props => {
   }, [])
 
   return (
-    <div data-testid='categories'>
+    <div data-testid='categories' className='container'>
       {loadInfo.data &&
         <ListCategories {...loadInfo.data} history={history} />
       }
