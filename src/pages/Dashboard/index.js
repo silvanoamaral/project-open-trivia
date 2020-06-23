@@ -2,12 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { resetIndexCurrent } from '../../redux/actions'
+
 import './Dashboard.scss'
 
 const Dashboard = props => {
   const {
-    dashboard
+    dashboard,
+    history,
+    resetIndexCurrent
   } = { ...props }
+
+  const handleClickBack = () => {
+    history.push('/')
+    resetIndexCurrent()
+  }
 
   return (
     <div className='dashboard'>
@@ -27,11 +36,11 @@ const Dashboard = props => {
       <div className='answers'>
         <div>
           <div>
-            <strong>7</strong>
+            <strong>{dashboard.easy.rightAnswer + dashboard.medium.rightAnswer + dashboard.hard.rightAnswer}</strong>
             <p>acertos</p>
           </div>
           <div>
-            <strong>3</strong>
+            <strong>{dashboard.easy.errorAnswer + dashboard.medium.errorAnswer + dashboard.hard.errorAnswer}</strong>
             <p>erros</p>
           </div>
         </div>
@@ -58,7 +67,7 @@ const Dashboard = props => {
       </div>
 
       <div className='btn'>
-        <button>Voltar ao início</button>
+        <button onClick={handleClickBack}>Voltar ao início</button>
       </div>
     </div>
   )
@@ -70,8 +79,16 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = dispatch => {
+  return {
+    resetIndexCurrent: () => { dispatch(resetIndexCurrent()) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 
 Dashboard.propTypes = {
+  resetIndexCurrent: PropTypes.func,
+  history: PropTypes.object,
   dashboard: PropTypes.object
 }

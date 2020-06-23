@@ -82,13 +82,18 @@ export const questionsReducer = (state = initState, action) => {
         errorAnswer: 1,
         rightAnswer: 1
       }
+    case 'RESET_INDEX_CURRENT':
+      return {
+        ...state,
+        levelQuestions: 'medium',
+        indexCurrent: 0
+      }
     case 'SET_ID_CATEGORIE':
       return {
         ...state,
         idCategorie: action.id
       }
     case 'CHANGE_DIFFICULTY_QUESTIONS':
-      console.log('CHANGE_DIFFICULTY_QUESTIONS', action)
       return {
         ...state,
         levelQuestions: action.difficulty

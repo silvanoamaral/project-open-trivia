@@ -6,6 +6,7 @@ import {
   SET_ERROR_ANSWER,
   RESET_LEVEL,
   SET_ID_CATEGORIE,
+  RESET_INDEX_CURRENT,
   CHANGE_DIFFICULTY_QUESTIONS
 } from './actionTypes'
 
@@ -33,6 +34,10 @@ export const setErrorAnswer = () => ({
 
 export const resetLevel = () => ({
   type: RESET_LEVEL
+})
+
+export const resetIndexCurrent = () => ({
+  type: RESET_INDEX_CURRENT
 })
 
 export const changeDifficulty = difficulty => ({

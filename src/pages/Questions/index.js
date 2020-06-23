@@ -12,7 +12,8 @@ import {
   setErrorAnswer,
   changeDifficulty,
   resetLevel,
-  fetchQuestions
+  fetchQuestions,
+  resetIndexCurrent
 } from '../../redux/actions'
 
 const Questions = props => {
@@ -53,6 +54,11 @@ const Questions = props => {
         throw new Error('Unable to fetch questions', error)
       }
     }
+  }
+
+  const handleClickClose = () => {
+    history.push('/')
+    resetIndexCurrent()
   }
 
   const rangeCategorie = () => {
@@ -128,6 +134,7 @@ const Questions = props => {
             correctAnswer = {questions[indexCurrent].correct_answer}
             onClick={handleClickQuestion}
             onClickAnswer={handleClickAnswer}
+            onClickClose={handleClickClose}
             disabled={buttonDisabled}
             activeTab={activeTab}
             indexCurrent={indexCurrent}
@@ -156,6 +163,7 @@ const mapDispatchToProps = dispatch => {
     setRightAnswer: () => { dispatch(setRightAnswer()) },
     setErrorAnswer: () => { dispatch(setErrorAnswer()) },
     resetLevel: () => { dispatch(resetLevel()) },
+    resetIndexCurrent: () => { dispatch(resetIndexCurrent()) },
     fetchQuestions: data => { dispatch(fetchQuestions(data)) },
     changeDifficulty: difficulty => { dispatch(changeDifficulty(difficulty)) }
   }
@@ -173,6 +181,7 @@ Questions.propTypes = {
   setRightAnswer: PropTypes.func,
   setErrorAnswer: PropTypes.func,
   changeDifficulty: PropTypes.func,
+  resetIndexCurrent: PropTypes.func,
   resetLevel: PropTypes.func,
   rightAnswer: PropTypes.number,
   errorAnswer: PropTypes.number,

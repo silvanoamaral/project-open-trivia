@@ -14,14 +14,18 @@ const QuestionOptions = props => {
     indexCurrent,
     onClick,
     disabled,
-    onClickAnswer
+    onClickAnswer,
+    onClickClose
   } = props
 
   return (
     <div>
       <div className='title'>
         <h2>{category}</h2>
-        <span><img src={require('../../assets/images/x-circle.svg')} /> Fechar</span>
+        <span onClick={onClickClose}>
+          <img src={require('../../assets/images/x-circle.svg')} />
+          Fechar
+        </span>
       </div>
 
       <div className='questions__box'>
@@ -62,14 +66,15 @@ const QuestionOptions = props => {
 export default QuestionOptions
 
 QuestionOptions.propTypes = {
+  onClickClose: PropTypes.func,
   onClickAnswer: PropTypes.func,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   category: PropTypes.string,
   difficulty: PropTypes.string,
   question: PropTypes.string,
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.array,
-  onClick: PropTypes.func,
   activeTab: PropTypes.number,
   indexCurrent: PropTypes.number
 }
