@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-snapshot'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -9,7 +9,7 @@ import Header from './common/Header'
 
 import './styles/main.scss'
 
-ReactDOM.render(
+render(
   <Provider store={ store }>
     <BrowserRouter>
       <Header />
