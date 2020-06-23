@@ -1,30 +1,59 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 import ListCategories from '../../components/ListCategories'
 
-import useApi from '../../utils/useApi'
-import { fetchQuestions, setIdCategorie } from '../../redux/actions'
+const initialRequestInfo = {
+  error: null,
+  data: null,
+  loading: false
+}
 
 const Categories = props => {
   const {
     history
   } = props
 
-  const [load, loadInfo] = useApi({
-    url: 'https://opentdb.com/api_category.php',
-    method: 'get'
-  })
+  const [requestInfo, setRequestInfo] = useState(initialRequestInfo)
+
+  const load = async (config) => {
+    setRequestInfo({
+      ...initialRequestInfo,
+      loading: true
+    })
+
+    let response = null
+
+    try {
+      response = await axios({
+        ...config
+      })
+
+      setRequestInfo({
+        ...initialRequestInfo,
+        data: response.data
+      })
+    } catch (error) {
+      setRequestInfo({
+        ...initialRequestInfo,
+        error
+      })
+    }
+  }
 
   useEffect(() => {
-    load()
+    load({
+      url: 'https://opentdb.com/api_category.php',
+      method: 'get'
+    })
   }, [])
 
   return (
     <div data-testid='categories' className='container'>
-      {loadInfo.data &&
-        <ListCategories {...loadInfo.data} history={history} />
+      {requestInfo.data &&
+        <ListCategories {...requestInfo.data} history={history} />
       }
     </div>
   )
@@ -36,18 +65,9 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchQuestions: data => { dispatch(fetchQuestions(data)) },
-    setIdCategorie: id => { dispatch(setIdCategorie(id)) }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps)(Categories)
 
 Categories.propTypes = {
-  fetchQuestions: PropTypes.func,
   history: PropTypes.object,
-  levelQuestions: PropTypes.string,
-  setIdCategorie: PropTypes.func
+  levelQuestions: PropTypes.string
 }
