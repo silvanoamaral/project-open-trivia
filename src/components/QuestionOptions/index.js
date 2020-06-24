@@ -23,7 +23,7 @@ const QuestionOptions = props => {
       <div className='title'>
         <h2>{category}</h2>
         <span onClick={onClickClose}>
-          <img src={require('../../assets/images/x-circle.svg')} />
+          <img src={require('../../assets/images/x-circle.svg')} alt='x-circle' />
           Fechar
         </span>
       </div>
@@ -32,7 +32,7 @@ const QuestionOptions = props => {
         <div>
           <p>Questão {indexCurrent + 1}</p>
           <p className='level'>
-            <img src={require('../../assets/images/star.svg')} />
+            <img src={require('../../assets/images/star.svg')} alt='star' />
             {difficulty}
           </p>
         </div>
