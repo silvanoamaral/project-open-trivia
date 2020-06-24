@@ -29,6 +29,7 @@ const Questions = props => {
     levelQuestions,
     changeDifficulty,
     fetchQuestions,
+    resetIndexCurrent,
     resetLevel,
     idCategorie,
     history
@@ -39,11 +40,6 @@ const Questions = props => {
   const [message, setMessage] = useState()
   const [buttonDisabled, setButtonDisabled] = useState(true)
   const [statusAnswer, setStatusAnswer] = useState('')
-
-  const resetQuestions = () => {
-    setActiveTab(null)
-    setButtonDisabled(true)
-  }
 
   const getQuestions = async (level) => {
     if (indexCurrent < 10) {
@@ -58,35 +54,36 @@ const Questions = props => {
 
   const handleClickClose = () => {
     history.push('/')
+    console.log('resetIndexCurrent')
     resetIndexCurrent()
   }
 
   const rangeCategorie = () => {
     if (rightAnswer === 2 && levelQuestions === 'medium') {
-      console.log('Precisa aumentar o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para hard', 'Id da Categoria', idCategorie)
       changeDifficulty('hard')
-
-      resetLevel()
       getQuestions('hard')
+      resetLevel()
     }
     if (rightAnswer === 2 && levelQuestions === 'easy') {
       changeDifficulty('medium')
-      resetLevel()
       getQuestions('medium')
-      console.log('Precisa aumentar o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para medium', 'Id da Categoria', idCategorie)
+      resetLevel()
     }
     if (errorAnswer === 2 && levelQuestions === 'medium') {
       changeDifficulty('easy')
-      resetLevel()
       getQuestions('easy')
-      console.log('Precisa diminuir o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para easy', 'Id da Categoria', idCategorie)
+      resetLevel()
     }
     if (errorAnswer === 2 && levelQuestions === 'hard') {
       changeDifficulty('medium')
-      resetLevel()
       getQuestions('medium')
-      console.log('Precisa diminuir o nível...', 'Nivel atual: ', levelQuestions, 'Nudar nível para medium', 'Id da Categoria', idCategorie)
+      resetLevel()
     }
+  }
+
+  const resetQuestions = () => {
+    setActiveTab(null)
+    setButtonDisabled(true)
   }
 
   const handleClickAnswer = () => {
@@ -101,8 +98,6 @@ const Questions = props => {
     }
     viewFeedback()
     resetQuestions()
-
-    rangeCategorie()
   }
 
   const handleClickQuestion = (params, index) => {
@@ -119,7 +114,11 @@ const Questions = props => {
     if (idCategorie === '') {
       history.push('/')
     }
-  }, [indexCurrent, idCategorie])
+
+    if (rightAnswer > 1 || errorAnswer > 1) {
+      rangeCategorie()
+    }
+  }, [indexCurrent, idCategorie, rightAnswer, errorAnswer])
 
   return (
     <div className='questions container'>

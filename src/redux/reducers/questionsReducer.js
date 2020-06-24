@@ -15,8 +15,8 @@ const initState = {
       rightAnswer: 0
     }
   },
-  errorAnswer: 1,
-  rightAnswer: 1,
+  errorAnswer: 0,
+  rightAnswer: 0,
   showHideFeedback: false,
   indexCurrent: 0,
   questions: []
@@ -45,7 +45,6 @@ export const questionsReducer = (state = initState, action) => {
     case 'SET_RIGHT_ANSWER':
       level = state.levelQuestions
       dashboard = state.dashboard
-      console.log('level', level)
 
       return {
         ...state,
@@ -62,7 +61,6 @@ export const questionsReducer = (state = initState, action) => {
     case 'SET_ERROR_ANSWER':
       level = state.levelQuestions
       dashboard = state.dashboard
-      console.log('level', level)
 
       return {
         ...state,
@@ -79,14 +77,16 @@ export const questionsReducer = (state = initState, action) => {
     case 'RESET_LEVEL':
       return {
         ...state,
-        errorAnswer: 1,
-        rightAnswer: 1
+        errorAnswer: 0,
+        rightAnswer: 0
       }
     case 'RESET_INDEX_CURRENT':
       return {
         ...state,
         levelQuestions: 'medium',
-        indexCurrent: 0
+        indexCurrent: 0,
+        errorAnswer: 0,
+        rightAnswer: 0
       }
     case 'SET_ID_CATEGORIE':
       return {
