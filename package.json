@@ -52,6 +52,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
+    "start": "node app/server/index.js",
     "build": "webpack -p --config webpack/webpack.prod.js",
     "dev": "webpack-dev-server --config webpack/webpack.dev.js --open",
     "test": "jest --config=jest.config.js --coverage --watchAll",
