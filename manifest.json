@@ -1,0 +1,14 @@
+{
+  "name": "Teste Dev Frontend",
+  "short_name": "Test",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "scope": "index.html",
+  "start_url": "index.html",
+  "icons": {
+    "src": "./src/assets/images/favicon.ico",
+    "sizes": "72x72",
+    "type": "image/png"
+  }
+}

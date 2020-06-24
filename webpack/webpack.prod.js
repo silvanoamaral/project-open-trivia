@@ -17,6 +17,7 @@ module.exports = merge(common, {
     }),
     new HtmlWebpackPlugin ({
       title: 'ReactJS - Production',
+      favicon: path.join(__dirname, '../src/assets/images/favicon.ico'),
       template:path.join(__dirname, '../public/index.html'),
       inject: 'body'
     })

@@ -66,6 +66,7 @@ module.exports = {
       ignoreOrder: false
     }),
     new HtmlWebPackPlugin({
+      favicon: './src/assets/images/favicon.ico',
       template: './public/index.html',
       filename: './index.html'
     })
